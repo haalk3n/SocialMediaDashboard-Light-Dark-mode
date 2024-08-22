@@ -3,7 +3,7 @@
 .toggle {
     /* & means inherits the parent class (toggle in this case*/
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr rem(60) 1fr;
     grid-template-rows: repeat(2, 1fr);
     border: none;
     gap: rem(12);
@@ -33,7 +33,11 @@
     }
 
     input[type="radio"]{
-        margin: 0;
+        z-index: 1;
+        position: relative;
+        height: rem(24);
+        width: rem(20);
+        margin: 0 -2px 0 -2px;
         opacity: 0;
     }
 
@@ -49,6 +53,7 @@
             var(--toggle-bg-end) 0%, 
             var(--toggle-bg-start) 98.02%
         );
+        pointer-events: none;
     }
     
     &__button {
@@ -60,5 +65,16 @@
         height: rem(18);
         border-radius: 50%;
         background-color: var(--dark-bg);
+    }
+
+    #light:checked ~ .toggle__button {
+        left: calc(100% - 19px);
+        right: 3px;
+    }
+
+    #system:checked ~ .toggle__button {
+        left: 50%;
+        right: auto;
+        transform: translate(-50%);
     }
 }
